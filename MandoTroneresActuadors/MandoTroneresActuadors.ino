@@ -37,17 +37,10 @@ int currentTimelineLength = 0;            // Length of current timeline
 MotorLineal mouth(MOTOR_1_A_PIN, MOTOR_1_B_PIN, MOTOR_1_MAX_MILLIS_OPENED);
 MotorLineal lighthouse(MOTOR_2_A_PIN, MOTOR_2_B_PIN, MOTOR_2_MAX_MILLIS_OPENED);
 
-// Show Timeline
-TimelineEvent mainShow[] = {
-    {0, [] { showActive = true; }},
-    {1000, [] {}},
-    {2000, [] { showActive = false; }}
-};
-
-TimelineEvent exampleShow[] = {
-    {0, []{showActive = true;}},
-    {2500,   [] {}},
-    {4500,  [] { showActive = false; }}};
+// Show definitions use the timeline type and motors declared above.
+#include "Shows/show.h"
+#include "Shows/preshow.h"
+#include "Shows/exampleShow.h"
 
 // Task declaration to run the showTimeline
 Task tTimeline(
@@ -101,7 +94,7 @@ void loop()
     // PRESHOW
     else if (dmx_slave.getChannelValue(DMX_PRESHOW_CHANNEL) > DMX_COMMAND_THRESHOLD)
     {
-      mouth.goDownMax();
+      runPreshow();
     }
     // EXAMPLE SHOW
     else if (dmx_slave.getChannelValue(DMX_EXAMPLESHOW_CHANNEL) > DMX_COMMAND_THRESHOLD)
