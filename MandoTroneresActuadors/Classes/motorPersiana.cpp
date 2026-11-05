@@ -1,5 +1,6 @@
 // Motor.cpp
 #include <TaskScheduler.h>
+#include "../configuration.h"
 
 // Global scheduler (extern from main.ino)
 extern Scheduler runner;
@@ -67,7 +68,7 @@ public:
         digitalWrite(pinDown, HIGH);
         digitalWrite(pinUp, LOW);
         active = true;
-        tStopPress.setInterval(100);
+        tStopPress.setInterval(PERSIANA_BUTTON_PRESS_MS);
         tStopPress.restartDelayed();
 
         tStop.setInterval(ms);
@@ -85,7 +86,7 @@ public:
         digitalWrite(pinStop, HIGH);
         digitalWrite(pinDown, LOW);
         active = true;
-        tStopPress.setInterval(100);
+        tStopPress.setInterval(PERSIANA_BUTTON_PRESS_MS);
         tStopPress.restartDelayed();
 
         tStop.setInterval(ms);
@@ -104,7 +105,7 @@ public:
         digitalWrite(pinUp, LOW);
         active = true;
 
-        tStopPress.setInterval(100);
+        tStopPress.setInterval(PERSIANA_BUTTON_PRESS_MS);
         tStopPress.restartDelayed();
     }
 
@@ -115,7 +116,7 @@ public:
             // Serial.println("Cant go max down. Movement active.");
             return;
         };
-        tStopPress.setInterval(100);
+        tStopPress.setInterval(PERSIANA_BUTTON_PRESS_MS);
         tStopPress.restartDelayed();
         active = true;
     }
@@ -124,7 +125,7 @@ public:
     {
         digitalWrite(pinStop, LOW);
 
-        tStopPress.setInterval(100);
+        tStopPress.setInterval(PERSIANA_BUTTON_PRESS_MS);
         tStopPress.restartDelayed();
     }
 
@@ -143,7 +144,7 @@ public:
             digitalWrite(pinDown, HIGH);
             digitalWrite(pinUp, LOW);
             active = true;
-            tStopPress.setInterval(100);
+            tStopPress.setInterval(PERSIANA_BUTTON_PRESS_MS);
             tStopPress.restartDelayed();
         }
     }
@@ -155,7 +156,7 @@ public:
             digitalWrite(pinUp, HIGH);
             digitalWrite(pinDown, LOW);
             active = true;
-            tStopPress.setInterval(100);
+            tStopPress.setInterval(PERSIANA_BUTTON_PRESS_MS);
             tStopPress.restartDelayed();
         }
     }

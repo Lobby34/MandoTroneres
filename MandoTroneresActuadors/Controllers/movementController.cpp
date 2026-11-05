@@ -1,4 +1,5 @@
 #include <Conceptinetics.h>
+#include "../configuration.h"
 
 void checkMovementCommand(DMX_Slave &dmx_slave, MotorLineal &motor, int manualChannel, int manualFixedChannel, int autoChannel)
 {
@@ -6,48 +7,42 @@ void checkMovementCommand(DMX_Slave &dmx_slave, MotorLineal &motor, int manualCh
   int mf = dmx_slave.getChannelValue(manualFixedChannel);
   int a = dmx_slave.getChannelValue(autoChannel);
 
-  // VARIABLES FOR MOVEMENT ZONES
-  const int DEAD_LOW = 181;  // dead zone lower bound
-  const int DEAD_HIGH = 199; // dead zone upper bound
-  const int LOWER_BOUNDRY = 128;
-  const int HIGHER_BOUNDRY = 255;
-
   // PRIORITY CHECKING
-  if (m > LOWER_BOUNDRY)
+  if (m > DMX_MOVEMENT_LOWER_BOUND)
   {
 
     // ----- 1. MANUAL MOVEMENT -----
-    if (m >= LOWER_BOUNDRY && m < DEAD_LOW)
+    if (m >= DMX_MOVEMENT_LOWER_BOUND && m < DMX_MOVEMENT_DEAD_LOW)
     {
       motor.startDownMovement();
       return; // manual overrides everything else
     }
-    else if (m > DEAD_HIGH && m <= HIGHER_BOUNDRY)
+    else if (m > DMX_MOVEMENT_DEAD_HIGH && m <= DMX_MOVEMENT_UPPER_BOUND)
     {
       motor.startUpMovement();
       return; // manual overrides everything else
     }
-    else if (m >= DEAD_LOW && m <= DEAD_HIGH)
+    else if (m >= DMX_MOVEMENT_DEAD_LOW && m <= DMX_MOVEMENT_DEAD_HIGH)
     {
       motor.stopMovement(); // dead zone, do nothing
       return;
     }
   }
-  else if (mf > LOWER_BOUNDRY)
+  else if (mf > DMX_MOVEMENT_LOWER_BOUND)
   {
 
     // ----- 2. MANUAL FIXED -----
-    if (mf >= LOWER_BOUNDRY && mf < DEAD_LOW)
+    if (mf >= DMX_MOVEMENT_LOWER_BOUND && mf < DMX_MOVEMENT_DEAD_LOW)
     {
       motor.goDownMax();
       return; // manual-fixed down
     }
-    else if (mf > DEAD_HIGH && mf <= HIGHER_BOUNDRY)
+    else if (mf > DMX_MOVEMENT_DEAD_HIGH && mf <= DMX_MOVEMENT_UPPER_BOUND)
     {
       motor.goUpMax();
       return; // manual-fixed up
     }
-    else if (mf >= DEAD_LOW && mf <= DEAD_HIGH)
+    else if (mf >= DMX_MOVEMENT_DEAD_LOW && mf <= DMX_MOVEMENT_DEAD_HIGH)
     {
       return;
     }
@@ -56,7 +51,7 @@ void checkMovementCommand(DMX_Slave &dmx_slave, MotorLineal &motor, int manualCh
   {
 
     // ----- 3. AUTO MODE -----
-    if (a > LOWER_BOUNDRY)
+    if (a > DMX_MOVEMENT_LOWER_BOUND)
     {
       motor.startAutoMovement();
       return;
@@ -75,48 +70,42 @@ void checkMovementCommandInverted(DMX_Slave &dmx_slave, MotorLineal &motor, int 
   int mf = dmx_slave.getChannelValue(manualFixedChannel);
   int a = dmx_slave.getChannelValue(autoChannel);
 
-  // VARIABLES FOR MOVEMENT ZONES
-  const int DEAD_LOW = 181;  // dead zone lower bound
-  const int DEAD_HIGH = 199; // dead zone upper bound
-  const int LOWER_BOUNDRY = 128;
-  const int HIGHER_BOUNDRY = 255;
-
   // PRIORITY CHECKING
-  if (m > LOWER_BOUNDRY)
+  if (m > DMX_MOVEMENT_LOWER_BOUND)
   {
 
     // ----- 1. MANUAL MOVEMENT -----
-    if (m >= LOWER_BOUNDRY && m < DEAD_LOW)
+    if (m >= DMX_MOVEMENT_LOWER_BOUND && m < DMX_MOVEMENT_DEAD_LOW)
     {
       motor.startUpMovement();
       return; // manual overrides everything else
     }
-    else if (m > DEAD_HIGH && m <= HIGHER_BOUNDRY)
+    else if (m > DMX_MOVEMENT_DEAD_HIGH && m <= DMX_MOVEMENT_UPPER_BOUND)
     {
       motor.startDownMovement();
       return; // manual overrides everything else
     }
-    else if (m >= DEAD_LOW && m <= DEAD_HIGH)
+    else if (m >= DMX_MOVEMENT_DEAD_LOW && m <= DMX_MOVEMENT_DEAD_HIGH)
     {
       motor.stopMovement(); // dead zone, do nothing
       return;
     }
   }
-  else if (mf > LOWER_BOUNDRY)
+  else if (mf > DMX_MOVEMENT_LOWER_BOUND)
   {
 
     // ----- 2. MANUAL FIXED -----
-    if (mf >= LOWER_BOUNDRY && mf < DEAD_LOW)
+    if (mf >= DMX_MOVEMENT_LOWER_BOUND && mf < DMX_MOVEMENT_DEAD_LOW)
     {
       motor.goUpMax();
       return; // manual-fixed down
     }
-    else if (mf > DEAD_HIGH && mf <= HIGHER_BOUNDRY)
+    else if (mf > DMX_MOVEMENT_DEAD_HIGH && mf <= DMX_MOVEMENT_UPPER_BOUND)
     {
       motor.goDownMax();
       return; // manual-fixed up
     }
-    else if (mf >= DEAD_LOW && mf <= DEAD_HIGH)
+    else if (mf >= DMX_MOVEMENT_DEAD_LOW && mf <= DMX_MOVEMENT_DEAD_HIGH)
     {
       return;
     }
@@ -125,7 +114,7 @@ void checkMovementCommandInverted(DMX_Slave &dmx_slave, MotorLineal &motor, int 
   {
 
     // ----- 3. AUTO MODE -----
-    if (a > LOWER_BOUNDRY)
+    if (a > DMX_MOVEMENT_LOWER_BOUND)
     {
       motor.startAutoMovement();
       return;
