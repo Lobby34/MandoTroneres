@@ -232,12 +232,10 @@ TimelineEvent mainShow[] = {
     {366050, []{leftMouth.goDownMax();}},
     {367040, []{rightMouth.goUpMax();}},
     {368040, []{centralMouth.goUpMax();}},
-    {368060, []{centralHead.startUpMovement();}},
     {369080, []{leftHead.goDownMax(); rightHead.goDownMax();}},
-    {370000, []{centralHead.stopMovement();}},
     {371050, []{rightMouth.goDownMax();}},
     {371060, []{leftMouth.startDownMovement();}},
-    {373050, []{centralMouth.goDownMax();}}
+    {373050, []{centralMouth.goDownMax();}},
     {375000, []{leftHead.startDownMovement(); rightHead.startDownMovement(); leftMouth.stopMovement();}},
     {377500, []{rightMouth.startDownMovement();}},
     {378000, []{leftHead.stopMovement(); rightHead.stopMovement();}},
@@ -250,52 +248,20 @@ TimelineEvent mainShow[] = {
 
 TimelineEvent exampleShow[] = {
     {0, []
-     {showActive = true; leftMouth.goUpMax(); centralMouth.goUpMax(); rightMouth.goUpMax(); leftHead.goUpMax(); rightHead.goUpMax(); }},
-    {5000, []
-     {leftMouth.goDownMax(); centralMouth.goDownMax(); rightMouth.goDownMax(); }},
-    {10000, []
-     {leftMouth.goUpMax(); rightMouth.goUpMax(); }},
-    {13000, []
-     { centralMouth.goUpMax(); }},
-    {15000, []
-     { leftMouth.goDownMax(); }},
-    {18000, []
-     { rightMouth.goDownMax(); }},
-    {19000, []
-     { centralMouth.goDownMax(); }},
-    {25000, []
-     {leftMouth.goUpMax(); centralMouth.goUpMax(); rightMouth.goUpMax(); }},
-    {30000, []
-     {leftMouth.goDownMax(); centralMouth.goDownMax(); rightMouth.goDownMax(); }},
-    {35000, []
-     {centralMouth.goUpMax(); rightMouth.goUpMax(); }},
-    {38000, []
-     { leftMouth.goUpMax(); }},
-    {40000, []
-     { centralMouth.goDownMax(); }},
-    {48000, []
-     { rightMouth.goDownMax(); }},
-    {49000, []
-     { leftMouth.goDownMax(); }},
-    {25000, []
-     {leftMouth.goUpMax(); centralMouth.goUpMax(); rightMouth.goUpMax(); }},
-    {55000, []
-     {rightMouth.goDownMax(); leftMouth.goDownMax(); centralMouth.goDownMax(); }},
-    {60000, []
-     {leftMouth.goUpMax(); centralMouth.goUpMax(); }},
-    {63000, []
-     { rightMouth.goUpMax(); }},
-    {65000, []
-     { leftMouth.goDownMax(); }},
-    {72000, []
-     { centralMouth.goDownMax(); }},
-    {73000, []
-     { rightMouth.goDownMax(); }},
-    {80000, []
-     {leftMouth.startDownMovement(); centralMouth.startDownMovement(); rightMouth.startDownMovement(); }},
-    {85000, []
-     {leftMouth.stopMovement(); centralMouth.stopMovement(); rightMouth.stopMovement(); }},
-    {160000, []
+     {showActive = true; leftHead.goUpMax(); rightHead.goUpMax(); leftMouth.goUpMax(); rightMouth.goUpMax(); centralMouth.goUpMax();}},
+    {2500,   [] {centralHead.goUpMax();}},
+    {5010,   [] {leftMouth.goDownMax(); centralMouth.goDownMax(); rightMouth.goDownMax();}},
+    {10020,  [] {leftMouth.goUpMax(); centralMouth.goUpMax(); rightMouth.goUpMax();}},
+    {15030,  [] {leftMouth.goDownMax(); centralMouth.goDownMax(); rightMouth.goDownMax();}},
+    {20040,  [] {leftMouth.goUpMax(); centralMouth.goUpMax(); rightMouth.goUpMax();}},
+    {25000,  [] {centralHead.goDownMax();}},
+    {25050,  [] {leftMouth.goDownMax(); centralMouth.goDownMax(); rightMouth.goDownMax();}},
+    {31000,  [] {leftMouth.startDownMovement(); rightMouth.startDownMovement(); centralMouth.startDownMovement();}},
+    {33000,  [] {leftMouth.stopMovement(); rightMouth.stopMovement(); centralMouth.stopMovement();}},
+    {35000,  [] {leftHead.goDownMax(); rightHead.goDownMax();}},
+    {40000,  [] {centralHead.startDownMovement(); leftHead.startDownMovement(); rightHead.startDownMovement();}},
+    {42000,  [] {centralHead.stopMovement(); leftHead.stopMovement(); rightHead.stopMovement();}},
+    {45000,  []
      { showActive = false; }}};
 
 // Task declaration to run the showTimeline
@@ -353,7 +319,7 @@ void loop()
       leftMouth.goDownMax();
       leftHead.goUpMax();
       centralMouth.goDownMax();
-      centralHead.goDownMax();
+      centralHead.goUpMax();
       rightMouth.goDownMax();
       rightHead.goUpMax();
     }
