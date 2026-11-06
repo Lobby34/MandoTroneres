@@ -65,6 +65,10 @@ void startTimeline(TimelineEvent *timeline, int length)
 
 void setup()
 {
+#if DEBUG_HEARTBEAT
+    pinMode(LED_BUILTIN, OUTPUT);
+    digitalWrite(LED_BUILTIN, LOW);
+#endif
     head1.begin();
     head2.begin();
     dorsal.begin();
@@ -81,6 +85,16 @@ void setup()
 
 void loop()
 {
+#if DEBUG_HEARTBEAT
+    static unsigned long lastHeartbeat = 0;
+    static bool heartbeatOn = false;
+    if (millis() - lastHeartbeat >= 500UL)
+    {
+        lastHeartbeat = millis();
+        heartbeatOn = !heartbeatOn;
+        digitalWrite(LED_BUILTIN, heartbeatOn ? HIGH : LOW);
+    }
+#endif
     runner.execute();
     if (tTimeline.isEnabled())
     {

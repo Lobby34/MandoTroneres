@@ -1,5 +1,11 @@
 #pragma once
 
+// Diagnostics: L blinks while loop() is running. Set to 0 after testing.
+#define DEBUG_HEARTBEAT 1
+// Set to 0 to test DMX and timers without configuring or writing piston pins.
+// This does not command connected valves closed; switch off valve power first.
+#define PISTON_OUTPUTS_ENABLED 1
+
 #define DMX_COMMAND_THRESHOLD 192
 #define DMX_PISTON_OPEN_THRESHOLD 128
 #define DMX_HEAD_LEFT_MAX 85

@@ -1,6 +1,7 @@
 #pragma once
 #include <Arduino.h>
 #include <TaskScheduler.h>
+#include "../configuration.h"
 
 // Global scheduler (extern from main sketch)
 extern Scheduler runner;
@@ -21,7 +22,7 @@ private:
     void writeState(PistonState selectedState)
     {
         state = selectedState;
-        if (configured)
+        if (configured && PISTON_OUTPUTS_ENABLED)
         {
             if (state == PistonState::Open)
             {
@@ -70,7 +71,7 @@ public:
     // Called from setup, after the Arduino hardware has initialized.
     void begin()
     {
-        if (configured)
+        if (configured && PISTON_OUTPUTS_ENABLED)
         {
             digitalWrite(pin, HIGH);
             pinMode(pin, OUTPUT);
