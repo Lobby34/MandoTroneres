@@ -1,5 +1,8 @@
 #pragma once
 
+// CQRobot DMX shield direction control (DE jumper): LOW selects receive.
+#define RXEN_PIN 2
+
 // -1 means unassigned (not pin 0). Unassigned pistons never write GPIO.
 #define PISTON_1_PIN 49
 #define PISTON_2_PIN 48

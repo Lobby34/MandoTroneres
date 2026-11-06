@@ -11,7 +11,7 @@ Scheduler runner;
 #include "Classes/Head.cpp"
 #include "Controllers/movementController.cpp"
 
-DMX_Slave dmx_slave(DMX_SLAVE_CHANNELS);
+DMX_Slave dmx_slave(DMX_SLAVE_CHANNELS, RXEN_PIN);
 boolean showActive = false;
 unsigned long showStartTime = 0;
 int timelineIndex = 0;
@@ -29,6 +29,7 @@ PistoNeumatic head2(PISTON_2_PIN, PISTON_2_OPEN_MS, PISTON_2_CLOSE_MS);
 PistoNeumatic dorsal(PISTON_3_PIN, PISTON_3_OPEN_MS, PISTON_3_CLOSE_MS);
 PistoNeumatic leftFin(PISTON_4_PIN, PISTON_4_OPEN_MS, PISTON_4_CLOSE_MS);
 PistoNeumatic rightFin(PISTON_5_PIN, PISTON_5_OPEN_MS, PISTON_5_CLOSE_MS);
+PistoNeumatic piston6(PISTON_6_PIN, PISTON_6_OPEN_MS, PISTON_6_CLOSE_MS);
 
 // Optional head pairings. Edit these to match the mechanism.
 Head head(head1, head2);
@@ -74,6 +75,7 @@ void setup()
     dorsal.begin();
     leftFin.begin();
     rightFin.begin();
+    piston6.begin();
 
     if (DMX_SLAVE_ADDRESS >= 1 && DMX_SLAVE_ADDRESS + DMX_SLAVE_CHANNELS - 1 <= 512)
     {
@@ -124,5 +126,6 @@ void loop()
         checkPistonCommand(dmx_slave, dorsal, DMX_PISTON_3_STATE_CHANNEL, DMX_PISTON_3_AUTO_CHANNEL);
         checkPistonCommand(dmx_slave, leftFin, DMX_PISTON_4_STATE_CHANNEL, DMX_PISTON_4_AUTO_CHANNEL);
         checkPistonCommand(dmx_slave, rightFin, DMX_PISTON_5_STATE_CHANNEL, DMX_PISTON_5_AUTO_CHANNEL);
+        checkPistonCommand(dmx_slave, piston6, DMX_PISTON_6_STATE_CHANNEL, DMX_PISTON_6_AUTO_CHANNEL);
     }
 }
