@@ -25,11 +25,12 @@ private:
         {
             if (state == PistonState::Open)
             {
-                digitalWrite(pin, HIGH);
+                // Active-low output: LOW opens the piston.
+                digitalWrite(pin, LOW);
             }
             else
             {
-                digitalWrite(pin, LOW);
+                digitalWrite(pin, HIGH);
             }
         }
     }
@@ -71,7 +72,7 @@ public:
     {
         if (configured)
         {
-            digitalWrite(pin, LOW);
+            digitalWrite(pin, HIGH);
             pinMode(pin, OUTPUT);
         }
         setState(PistonState::Closed);
